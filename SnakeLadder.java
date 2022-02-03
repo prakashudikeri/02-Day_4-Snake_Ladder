@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class SnakeLadder {
- 
+
 	final int noPlay = 0;
 	final int climbLadder = 1;
 	final int snakeBite = 2;
@@ -11,43 +11,49 @@ public class SnakeLadder {
 
     Random randomNo = new Random();
 
-    void showPosition() {
-    		System.out.println("Player Starting Position : "+ playerPosition);
-    	}
+    private void showPosition() {
+        System.out.println("Player Starting Position : "+ playerPosition);
+    }
 
-    int rolldice() {
-    		int diceNo = randomNo.nextInt(6)+1;
-    		return diceNo;
-    	}
+    //Method to Roll the dice and Get No between 1 to 6
+    private int rolldice() {
+        int diceNo = randomNo.nextInt(6)+1;
+        return diceNo;
+    }
 
+    //Method to Check for Option
     private void optionPlay(int diceNo) {
+
         int optionNo = randomNo.nextInt(2)+1;
-        System.out.println("Option No is : "+ optionNo);
+        System.out.println("Option No is "+ optionNo);
 
         switch (optionNo) {
             case noPlay:
                 System.out.println("Player got NO PLAY");
                 break;
             case climbLadder:
-                System.out.println("Player got Ladder to climb");
+                System.out.println("Player got Ladder");
                 playerPosition += diceNo;
+                //If Player Position greater than 100 then skip the Play
                 if(playerPosition > 100) {
                     System.out.println("Sorry The Position is Out of Board.");
                     playerPosition -= diceNo;
-                } break;
+                }
+                break;
             case snakeBite:
-                System.out.println("Player got Snake Bite");
+                System.out.println("Player got SNAKE");
                 playerPosition -= diceNo;
                 if (playerPosition < 0) {
                     playerPosition = 0;
-                } break;
+                }
+                break;
         }
     }
 
     public static void main(String[] args) {
-        	SnakeLadder player1 = new SnakeLadder();
-        	player1.showPosition();
-        	
+        SnakeLadder player1 = new SnakeLadder();
+        player1.showPosition();
+       
         while( player1.playerPosition != 100) {
             int diceNo = player1.rolldice();
             System.out.println("Dice Number for Player : "+ diceNo);
